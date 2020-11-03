@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flexbox built Navigation Bar</title>
+  <style>
+    body{
+      margin:0;
+      padding:0;
+    }
+    nav{
+      display: flex;
+      max-width: 1140px;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+    }
+    nav div.nav-logo img{
+      max-height: 32px;
+    }
+    nav ul.nav-menu{
+      display:flex;
+    }
+    nav ul.nav-menu li{
+      list-style: none;
+      margin:auto;
+      padding:auto;
+    }
+    nav ul.nav-menu li a.mobile-menu {
+      display: none;
+    }
+    nav ul.nav-menu li a.nav-items{
+      padding:8px;
+      margin:auto;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #303137;
+    }
+    nav a.mobile-menu {
+      display:none;
+    }
+    nav a.bottom-button{
+      display:none;
+    }
+    @media screen and (max-width:600px){
+      nav ul.nav-menu{
+        display:none;
+      }
+      nav.responsive {
+        align-items: flex-start;
+      }
+      nav ul.nav-menu.responsive{
+        display: block;
+        position:fixed;
+        width: 100%;
+        background:#eee;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+        bottom:0;
+        height: 50%;
+      }
+      nav ul.nav-menu.responsive li{
+        margin:auto;
+        line-height: 32px;
+      }
+      nav a.mobile-menu{
+        display:inline;
+      }
+      nav a.bottom-button{
+        display:none;
+      }
+      nav a.bottom-button.responsive{
+        display:block;
+        position:fixed;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="nav">
+    <div class='nav-logo'><img src="./images/logo-header.png" alt="Header Logo"></div>
+    <ul class='nav-menu' id='nav-menu'>
+      <li><a class='nav-items' onclick="responsiveMenu()" href="#">item-1</a></li>
+      <li><a class='nav-items' onclick="responsiveMenu()" href="#">item-1</a></li>
+      <li><a class='nav-items' onclick="responsiveMenu()" href="#">item-1</a></li>
+      <li><a class='nav-items' onclick="responsiveMenu()" href="#">item-1</a></li>
+      <li><a class='nav-items' onclick="responsiveMenu()" href="#">item-1</a></li>      
+    </ul>
+    <a class='mobile-menu' onclick="responsiveMenu()" href="javascript:void(0);">Mobile Menu</a>
+    <a class='bottom-button' id='bottom-button' onClick="responsiveMenu()" href="javascript:void(0);">Thumb Button</a>
+  </nav>
+</body>
+
+<script>
+  function responsiveMenu(){
+    let mobile = document.getElementById('nav-menu');
+    let nav = document.getElementById('nav');
+    if (mobile.className === 'nav-menu'){
+      mobile.className += ' responsive'
+      nav.className += 'responsive';
+    } else {
+      mobile.className = 'nav-menu'
+      nav.className = '';
+    }
+  }
+  window.onscroll = function() {
+    if (window.innerWidth < 601) {
+      menuButtonBottom();
+    }
+  }
+  function menuButtonBottom(){
+    var bottomButton = document.getElementById('bottom-button');
+    if (document.body.scrollTop > 32 || document.documentElement.scrollTop > 32){
+      bottomButton.classList += ' responsive';
+    } else {bottomButton.classList = 'bottom-button'}
+  }
+</script>
+
+</html>
